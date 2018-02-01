@@ -1,0 +1,89 @@
+<html>
+<head>
+    <style>
+        .platform-block {
+            width: 30%;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        body {
+            font-family: helvetica, sans-serif;
+            font-size: 17.600000381469727px;
+            font-weight: normal;
+        }
+
+        h1 {
+            margin-bottom: 0px;
+            width: 100%;
+            border-bottom: thin solid black;
+        }
+    </style>
+    <script>
+        function open(url) {
+            safari.application.activeBrowserWindow.activeTab.url = url
+        }
+
+        function newTab(url) {
+            safari.application.activeBrowserWindow.openTab().url = url
+        }
+
+        function openApp(appName) {
+            var regex = /https?:\/\/(?:steemit\.com|busy\.org)(\/.*)/;
+            var currentURL = safari.application.activeBrowserWindow.activeTab.url;
+            var matches = currentURL ? currentURL.match(regex) : null;
+
+            var steemitLink = document.getElementById("open-steemit");
+            var busyLink = document.getElementById("open-busy");
+
+            switch (appName) {
+                case "steemit":
+                    if (matches != null) {
+                        open("https://steemit.com" + matches[1]);
+                    } else {
+                        newTab("https://steemit.com");
+                    }
+                    break;
+                case "busy":
+                    if (matches != null) {
+                        open("https://busy.org" + matches[1]);
+                    } else {
+                        newTab("https://busy.org");
+                    }
+                    break;
+                case "dtube":
+                    newTab("https://d.tube");
+                    break;
+                case "stats":
+                    newTab("https://steemstats.com");
+                    break;
+                case "dlive":
+                    newTab("https://www.dlive.io");
+                    break;
+                case "dsound":
+                    newTab("https://dsound.audio");
+                    break;
+                case "steepshot":
+                    newTab("https://alpha.steepshot.io");
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <h1>Steemit</h1>
+        <hline \>
+    </center>
+
+    <center>
+        <img onclick="openApp('steemit');" src="steem.png" class="platform-block"/>
+        <img onclick="openApp('busy');" src="busy.png" class="platform-block"/>
+        <img onclick="openApp('dtube');" src="dtube.png" class="platform-block"/>
+        <img onclick="openApp('stats');" src="stats.png" class="platform-block"/>
+        <img onclick="openApp('dlive');" src="dlive.png" class="platform-block"/>
+        <img onclick="openApp('dsound');" src="dsound.png" class="platform-block"/>
+        <img onclick="openApp('steepshot');" src="steepshot.jpeg" class="platform-block"/>
+    </center>
+</body>
+</html>
